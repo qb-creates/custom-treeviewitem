@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,15 +47,16 @@ namespace CustomTreeViewItem
     /// </summary>
     public class VSCodeItems : TreeViewItem
     {
-        private TreeViewItem treeViewItem;
-        private ItemsControl items;
+        private Border border;
 
-
-        public void Add(object newItem)
+        public ItemCollection MyItems
         {
-            treeViewItem = (TreeViewItem)GetTemplateChild("PART_VSCodeTreeViewItem");
-            treeViewItem.Items.Add(newItem);
+            get
+            {
+                return Items;
+            }
         }
+    
         static VSCodeItems()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(VSCodeItems), new FrameworkPropertyMetadata(typeof(VSCodeItems)));
@@ -65,9 +67,20 @@ namespace CustomTreeViewItem
         }
  
         public override void OnApplyTemplate()
-        {
-            treeViewItem = (TreeViewItem)GetTemplateChild("PART_VSCodeTreeViewItem");
-            
+        { 
+            border = (Border)GetTemplateChild("FullBorder");
+            border.MouseEnter += Border_MouseEnter;
+            border.MouseLeave += Border_MouseLeave;
         }
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+           
+        }
+
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+     
+        }
+
     }
 }
