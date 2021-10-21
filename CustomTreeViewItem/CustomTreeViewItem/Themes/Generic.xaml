@@ -24,18 +24,19 @@
     <Style TargetType="{x:Type local:VSCodeItems}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Foreground" Value="LightGray" />
         <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="Margin" Value="0,0,0,0"/>
-        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Width}"/>
+        <Setter Property="Margin" Value="-45,0,0,0"/>
+        <Setter Property="Width" Value="2000"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource TreeViewItemFocusVisual}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:VSCodeItems}">
                     <Grid Margin="0" Background="Transparent">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -58,37 +59,63 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
+
+                        <StackPanel Grid.Column="0">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=FullBorder, Path=IsMouseOver}" Value="true">
+                                            <Setter Property="Background" Value="#AA313131"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=FullBorder, Path=IsMouseOver}" Value="false">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                        </StackPanel>
+
+
                         <!--My full border around the TreeView Item. Will Edit the border and background of this to show that a item has been selected. -->
                         <Border x:Name="FullBorder" 
-                                Grid.Column="0" Grid.ColumnSpan="3"
-                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}"
+                                Grid.Column="1" Grid.ColumnSpan="3"
+                                Width="1000"
                                 Padding="0"
                                 HorizontalAlignment="Left">
+                           
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Background" Value="#AAA3331F"/>
+                                            <Setter Property="Background" Value="#AA313131"/>
+                                            <Setter Property="BorderBrush" Value="#AA313131"/>
+                                            <Setter Property="BorderThickness" Value="3"/>
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="false">
                                             <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                         </Trigger>
                                         <DataTrigger Binding="{Binding ElementName=Bd, Path=IsMouseOver}" Value="true">
                                             <Setter Property="Background" Value="#AAA3331F"/>
+                                            <Setter Property="BorderBrush" Value="#AAA3331F"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ElementName=Expander, Path=IsMouseOver}" Value="true">
                                             <Setter Property="Background" Value="#AAA3331F"/>
+                                            <Setter Property="BorderBrush" Value="#AAA3331F"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
                         </Border>
                         <!---->
-                        <ToggleButton x:Name="Expander" 
+                        <ToggleButton x:Name="Expander" Grid.Column="1"
                                       Style="{DynamicResource FolderToggleButtonStyle}"
                                       IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                                       ClickMode="Press"
-                                      Margin="20,0,0,0">
+                                      Margin="0,0,0,0">
                             <Image>
                                 <Image.Style>
                                     <Style TargetType="{x:Type Image}">
@@ -107,10 +134,10 @@
                             </Image>
                         </ToggleButton>
                         <Border x:Name="Bd"
-                                Grid.Column="1" Width="auto" HorizontalAlignment="Left" 
+                                Grid.Column="2" Width="auto" HorizontalAlignment="Left" 
                                 Background="Transparent"
                                 BorderBrush="Transparent"
-                                BorderThickness=".5"
+                                BorderThickness="0"
                                 Padding="{TemplateBinding Padding}"
                                 TextBlock.Foreground="{TemplateBinding Foreground}" 
                                 Margin="5,0,0,0">
@@ -125,7 +152,11 @@
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
                         </Border>
-                        <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" />
+                        <DockPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
+                            <ItemsPresenter x:Name="ItemsHost"  Visibility="Collapsed" >
+
+                            </ItemsPresenter>
+                        </DockPanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
