@@ -16,128 +16,77 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CustomTreeViewItem
-{
-    /// <summary>
-    /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
-    ///
-    /// Step 1a) Using this custom control in a XAML file that exists in the current project.
-    /// Add this XmlNamespace attribute to the root element of the markup file where it is 
-    /// to be used:
-    ///
-    ///     xmlns:MyNamespace="clr-namespace:CustomTreeViewItem"
-    ///
-    ///
-    /// Step 1b) Using this custom control in a XAML file that exists in a different project.
-    /// Add this XmlNamespace attribute to the root element of the markup file where it is 
-    /// to be used:
-    ///
-    ///     xmlns:MyNamespace="clr-namespace:CustomTreeViewItem;assembly=CustomTreeViewItem"
-    ///
-    /// You will also need to add a project reference from the project where the XAML file lives
-    /// to this project and Rebuild to avoid compilation errors:
-    ///
-    ///     Right click on the target project in the Solution Explorer and
-    ///     "Add Reference"->"Projects"->[Select this project]
-    ///
-    ///
-    /// Step 2)
-    /// Go ahead and use your control in the XAML file.
-    ///
-    ///     <MyNamespace:VSCodeItems/>
-    ///
-    /// </summary>
-    public class VSCodeItems : TreeViewItem
+{    public partial class VSCodeItems : TreeViewItem
     {
-        private Border border;
-        private ToggleButton expander;
+        private Border fullBorder;
+        private Border presenterBorder;
+        private Image expander;
+        private bool isChecked = false;
 
         static VSCodeItems()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(VSCodeItems), new FrameworkPropertyMetadata(typeof(VSCodeItems)));
         }
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new double Width
-        {
-            get;
-            internal set;
-        }
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new double MaxWidth
-        {
-            get;
-            internal set;
-        }
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new double Height
-        {
-            get;
-            internal set;
-        }
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new double MaxHeight
-        {
-            get;
-            internal set;
-        }
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new Thickness Margin
-        {
-            get;
-            internal set;
-        }
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new Thickness Padding
-        {
-            get;
-            internal set;
-        }
 
-        internal Thickness MarginThickness
-        {
-            get { return (Thickness)GetValue(MarginThicknessProperty); }
-            set { SetValue(MarginThicknessProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MarginThickness.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MarginThicknessProperty =
-            DependencyProperty.Register("MarginThickness", typeof(Thickness), typeof(VSCodeItems), new PropertyMetadata(new Thickness(10030, 0, 5, 0)));
-
-
-
-        public Brush HighlightedColor
-        {
-            get { return (Brush)GetValue(HighlightedColorProperty); }
-            set { SetValue(HighlightedColorProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HighlightedColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HighlightedColorProperty =
-            DependencyProperty.Register("HighlightedColor", typeof(Brush), typeof(VSCodeItems), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xAA, 0x31, 0x31, 0x31))));
-
+      
 
         public void AddItem(VSCodeItems newItem)
         {
-            newItem.MarginThickness  = new Thickness(10010, 0, 5, 0);
+            newItem.MarginThickness  = new Thickness(9990, 0, 5, 0);
             Items.Add(newItem); 
         }
         public override void OnApplyTemplate()
         {
-            border = (Border)GetTemplateChild("FullBorder");
-            expander = (ToggleButton)GetTemplateChild("Expander");
-            
-            border.MouseEnter += Border_MouseEnter;
-            border.MouseLeave += Border_MouseLeave;
+            CheckedImageSource = new BitmapImage(new Uri(@"/Images/ArrowDown.png", UriKind.Relative));
+            UncheckedImageSource = new BitmapImage(new Uri(@"/Images/ArrowRight.png", UriKind.Relative));
+            fullBorder = (Border)GetTemplateChild("PART_FullBorder");
+            expander = (Image)GetTemplateChild("PART_Expander");
+            presenterBorder = (Border)GetTemplateChild("PART_PresenterBorder");
+
+            this.MouseDoubleClick += VSCodeItems_MouseDoubleClick;
+            fullBorder.MouseLeftButtonUp += Border_MouseLeftButtonUp;
+            expander.MouseLeftButtonUp += Expander_MouseLeftButtonUp;
+            presenterBorder.MouseLeftButtonUp += PresenterBorder_MouseLeftButtonUp;
         }
 
 
-        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        private void VSCodeItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-   
+            e.Handled = true;
         }
 
-        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-     
+            ToggleExpansion();
+        }
+        private void Expander_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ToggleExpansion();
+        }
+        private void PresenterBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ToggleExpansion();
+        }
+        public void UnSubscribeEvents()
+        {
+            this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
+            fullBorder.MouseLeftButtonDown -= Border_MouseLeftButtonUp;
+            expander.MouseLeftButtonUp -= Expander_MouseLeftButtonUp;
+            presenterBorder.MouseLeftButtonUp -= PresenterBorder_MouseLeftButtonUp;
+        }
+        private void ToggleExpansion()
+        {
+            isChecked = !isChecked;
+            if (isChecked)
+            {
+                this.IsExpanded = true;
+                expander.Source = CheckedImageSource;
+            }
+            else
+            {
+                this.IsExpanded = false;
+                expander.Source = UncheckedImageSource;
+            }
         }
 
     }

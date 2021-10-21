@@ -7,9 +7,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Width" Value="15"/>
         <Setter Property="Height" Value="15"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -26,7 +23,7 @@
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="LightGray" />
+   
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="Margin" Value="-10000,0,0,0"/>
         <Setter Property="Width" Value="11000">
@@ -65,7 +62,7 @@
                 
 
                         <!--My full border around the TreeView Item. Will Edit the border and background of this to show that a item has been selected. -->
-                        <Border x:Name="FullBorder" 
+                        <Border x:Name="PART_FullBorder" 
                                 Grid.Column="0" Grid.ColumnSpan="3"
                                 Width="11000"
                                 Padding="0"
@@ -84,12 +81,12 @@
                                             <Setter Property="BorderBrush" Value="Transparent"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                         </Trigger>
-                                        <DataTrigger Binding="{Binding ElementName=Bd, Path=IsMouseOver}" Value="true">
+                                        <DataTrigger Binding="{Binding ElementName=PART_PresenterBorder, Path=IsMouseOver}" Value="true">
                                             <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                             <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding ElementName=Expander, Path=IsMouseOver}" Value="true">
+                                        <DataTrigger Binding="{Binding ElementName=PART_Expander, Path=IsMouseOver}" Value="true">
                                             <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                             <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                             <Setter Property="BorderThickness" Value="1"/>
@@ -99,36 +96,21 @@
                             </Border.Style>
                         </Border>
                         <!---->
-                        <ToggleButton x:Name="Expander" Grid.Column="0" Background="Red" BorderThickness="2" BorderBrush="Red"
-                                      Style="{DynamicResource FolderToggleButtonStyle}"
-                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
-                                      ClickMode="Press"
-                                      Margin="{TemplateBinding MarginThickness}">
-                            <Image>
-                                <Image.Style>
-                                    <Style TargetType="{x:Type Image}">
-                                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                                        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Value="true">
-                                                <Setter Property="Source" Value="/Images/ArrowDown.png"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Value="false">
-                                                <Setter Property="Source" Value="/Images/ArrowRight.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                        </ToggleButton>
-                        <Border x:Name="Bd"
-                                Grid.Column="1" Width="auto" HorizontalAlignment="Left" 
-                                Background="Transparent"
-                                BorderBrush="Transparent"
-                                BorderThickness="0"
-                                Padding="{TemplateBinding Padding}"
-                                TextBlock.Foreground="{TemplateBinding Foreground}" 
-                                Margin="0,0,0,0">
+
+
+                        <Image x:Name="PART_Expander" Grid.Column="0" 
+                               Margin="{TemplateBinding MarginThickness}" 
+                               Source="/Images/ArrowRight.png" 
+                               RenderOptions.BitmapScalingMode="HighQuality" 
+                               Width="15" Height="15">
+                        </Image>
+
+
+                        <Border x:Name="PART_PresenterBorder"
+                                Grid.Column="1" 
+                                Width="auto" 
+                                HorizontalAlignment="Left" 
+                                Margin="0,5,0,5">
                             <ContentPresenter x:Name="PART_Header"
                                             ContentSource="Header"
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
