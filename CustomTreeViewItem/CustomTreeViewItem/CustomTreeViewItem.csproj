@@ -80,7 +80,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Styles\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
