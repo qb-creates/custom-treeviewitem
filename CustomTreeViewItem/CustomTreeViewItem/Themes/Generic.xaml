@@ -75,9 +75,9 @@
                                 <Style TargetType="Border">
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Background" Value="#AA313131"/>
-                                            <Setter Property="BorderBrush" Value="#AA313131"/>
-                                            <Setter Property="BorderThickness" Value="3"/>
+                                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
+                                            <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="false">
                                             <Setter Property="Background" Value="Transparent"/>
@@ -85,13 +85,13 @@
                                             <Setter Property="BorderThickness" Value="1"/>
                                         </Trigger>
                                         <DataTrigger Binding="{Binding ElementName=Bd, Path=IsMouseOver}" Value="true">
-                                            <Setter Property="Background" Value="#AAA3331F"/>
-                                            <Setter Property="BorderBrush" Value="#AAA3331F"/>
+                                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
+                                            <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ElementName=Expander, Path=IsMouseOver}" Value="true">
-                                            <Setter Property="Background" Value="#AAA3331F"/>
-                                            <Setter Property="BorderBrush" Value="#AAA3331F"/>
+                                            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
+                                            <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                             <Setter Property="BorderThickness" Value="1"/>
                                         </DataTrigger>
                                     </Style.Triggers>
