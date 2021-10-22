@@ -42,7 +42,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for CheckedImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CheckedImageSourceProperty =
-            DependencyProperty.Register("CheckedImageSource", typeof(ImageSource), typeof(VSCodeItems));
+            DependencyProperty.Register("CheckedImageSource", typeof(ImageSource), typeof(VSCodeItems), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/ArrowDown.png"))));
         public ImageSource UncheckedImageSource
         {
             get { return (ImageSource)GetValue(UncheckedImageSourceProperty); }
@@ -51,6 +51,6 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for UncheckedImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UncheckedImageSourceProperty =
-            DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(VSCodeItems));
+            DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(VSCodeItems), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/ArrowRight.png"))));
     }
 }

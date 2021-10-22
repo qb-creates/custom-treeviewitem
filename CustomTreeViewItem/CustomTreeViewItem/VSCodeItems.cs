@@ -37,8 +37,6 @@ namespace CustomTreeViewItem
         }
         public override void OnApplyTemplate()
         {
-            CheckedImageSource = new BitmapImage(new Uri(@"/Images/ArrowDown.png", UriKind.Relative));
-            UncheckedImageSource = new BitmapImage(new Uri(@"/Images/ArrowRight.png", UriKind.Relative));
             fullBorder = (Border)GetTemplateChild("PART_FullBorder");
             expander = (Image)GetTemplateChild("PART_Expander");
             presenterBorder = (Border)GetTemplateChild("PART_PresenterBorder");
@@ -47,6 +45,8 @@ namespace CustomTreeViewItem
             fullBorder.MouseLeftButtonUp += Border_MouseLeftButtonUp;
             expander.MouseLeftButtonUp += Expander_MouseLeftButtonUp;
             presenterBorder.MouseLeftButtonUp += PresenterBorder_MouseLeftButtonUp;
+
+            expander.Source = UncheckedImageSource;
         }
 
 
@@ -77,12 +77,12 @@ namespace CustomTreeViewItem
         private void ToggleExpansion()
         {
             isChecked = !isChecked;
-            if (isChecked)
+            if (isChecked && this.HasItems)
             {
                 this.IsExpanded = true;
                 expander.Source = CheckedImageSource;
             }
-            else
+            else if (!isChecked && this.HasItems)
             {
                 this.IsExpanded = false;
                 expander.Source = UncheckedImageSource;
