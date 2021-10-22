@@ -8,7 +8,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,0,3,0"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -68,7 +68,7 @@
                                     <Image x:Name="PART_Expander" Source="/Images/ArrowRight.png" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
                                 </Border>
 
-                                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,5,0,5">
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" >
                                     <Button x:Name="PART_UtilityButtonOne"                        
                                             HorizontalAlignment="right" 
                                             Cursor="Hand"

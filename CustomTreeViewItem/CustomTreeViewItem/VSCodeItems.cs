@@ -71,7 +71,7 @@ namespace CustomTreeViewItem
         {
             this.PreviewMouseLeftButtonUp += VSCodeItems_PreviewMouseLeftButtonUp;
             this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
-            fullBorder.MouseLeftButtonDown -= Border_MouseLeftButtonUp;
+            fullBorder.MouseLeftButtonUp -= Border_MouseLeftButtonUp;
             expander.MouseLeftButtonUp -= Expander_MouseLeftButtonUp;
             presenterBorder.MouseLeftButtonUp -= PresenterBorder_MouseLeftButtonUp;
         }
