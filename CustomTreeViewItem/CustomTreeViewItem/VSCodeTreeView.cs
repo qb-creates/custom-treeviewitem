@@ -142,7 +142,7 @@ namespace CustomTreeViewItem
             utilityButtonTwo.MouseLeave += UtilityButton_MouseLeave;
             utilityButtonThree.MouseEnter += UtilityButton_MouseEnter;
             utilityButtonThree.MouseLeave += UtilityButton_MouseLeave;
-            border.PreviewMouseLeftButtonDown += Border_PreviewMouseLeftButtonDown;
+            border.PreviewMouseLeftButtonUp += Border_PreviewMouseLeftButtonUp;
             utilityButtonOne.Click += UtilityButtonOne_Click;
 
             expander.Source = UncheckedImageSource;
@@ -167,7 +167,7 @@ namespace CustomTreeViewItem
             isMouseOverUtility = true;
         }
 
-        private void Border_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Border_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (!isMouseOverUtility)
             {

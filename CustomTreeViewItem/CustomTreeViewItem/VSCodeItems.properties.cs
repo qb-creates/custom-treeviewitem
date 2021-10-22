@@ -21,8 +21,6 @@ namespace CustomTreeViewItem
         public static readonly DependencyProperty MarginThicknessProperty =
             DependencyProperty.Register("MarginThickness", typeof(Thickness), typeof(VSCodeItems), new PropertyMetadata(new Thickness(10015, 0, 5, 0)));
 
-
-
         public Brush HighlightedColor
         {
             get { return (Brush)GetValue(HighlightedColorProperty); }
@@ -52,5 +50,19 @@ namespace CustomTreeViewItem
         // Using a DependencyProperty as the backing store for UncheckedImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UncheckedImageSourceProperty =
             DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(VSCodeItems), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/ArrowRight.png"))));
+
+
+
+        public bool ItemSelected
+        {
+            get { return (bool)GetValue(ItemSelectedProperty); }
+            set { SetValue(ItemSelectedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemSelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemSelectedProperty =
+            DependencyProperty.Register("ItemSelected", typeof(bool), typeof(VSCodeItems), new PropertyMetadata(false));
+
+
     }
 }

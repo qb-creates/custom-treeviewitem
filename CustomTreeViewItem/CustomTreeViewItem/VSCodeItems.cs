@@ -69,14 +69,22 @@ namespace CustomTreeViewItem
         }
         public void UnSubscribeEvents()
         {
+            this.PreviewMouseLeftButtonUp += VSCodeItems_PreviewMouseLeftButtonUp;
             this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
             fullBorder.MouseLeftButtonDown -= Border_MouseLeftButtonUp;
             expander.MouseLeftButtonUp -= Expander_MouseLeftButtonUp;
             presenterBorder.MouseLeftButtonUp -= PresenterBorder_MouseLeftButtonUp;
         }
+
+        private void VSCodeItems_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ItemSelected = !ItemSelected;
+        }
+
         private void ToggleExpansion()
         {
             isChecked = !isChecked;
+            ItemSelected = !ItemSelected;
             if (isChecked && this.HasItems)
             {
                 this.IsExpanded = true;
