@@ -41,50 +41,34 @@ namespace CustomTreeViewItem
             expander = (Image)GetTemplateChild("PART_Expander");
             presenterBorder = (Border)GetTemplateChild("PART_PresenterBorder");
 
+            this.GotFocus += VSCodeItems_GotFocus;
+            this.LostFocus += VSCodeItems_LostFocus;
             this.MouseDoubleClick += VSCodeItems_MouseDoubleClick;
-            fullBorder.MouseLeftButtonUp += Border_MouseLeftButtonUp;
-            expander.MouseLeftButtonUp += Expander_MouseLeftButtonUp;
-            presenterBorder.MouseLeftButtonUp += PresenterBorder_MouseLeftButtonUp;
-
+            fullBorder.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
+            expander.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
+            presenterBorder.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
+    
             expander.Source = UncheckedImageSource;
         }
 
+        private void VSCodeItems_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ItemSelected = false;
+        }
+
+        private void VSCodeItems_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ItemSelected = true;
+        }
 
         private void VSCodeItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
         }
-
-        private void Border_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleExpansion();
-        }
-        private void Expander_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleExpansion();
-        }
-        private void PresenterBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ToggleExpansion();
-        }
-        public void UnSubscribeEvents()
-        {
-            this.PreviewMouseLeftButtonUp += VSCodeItems_PreviewMouseLeftButtonUp;
-            this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
-            fullBorder.MouseLeftButtonUp -= Border_MouseLeftButtonUp;
-            expander.MouseLeftButtonUp -= Expander_MouseLeftButtonUp;
-            presenterBorder.MouseLeftButtonUp -= PresenterBorder_MouseLeftButtonUp;
-        }
-
-        private void VSCodeItems_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ItemSelected = !ItemSelected;
-        }
-
-        private void ToggleExpansion()
+        private void TreeViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             isChecked = !isChecked;
-            ItemSelected = !ItemSelected;
+
             if (isChecked && this.HasItems)
             {
                 this.IsExpanded = true;
@@ -96,6 +80,13 @@ namespace CustomTreeViewItem
                 expander.Source = UncheckedImageSource;
             }
         }
-
+      
+        public void UnSubscribeEvents()
+        {
+            this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
+            fullBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+            expander.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+            presenterBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+        }
     }
 }

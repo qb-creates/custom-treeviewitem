@@ -29,7 +29,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for HighlightedColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HighlightedColorProperty =
-            DependencyProperty.Register("HighlightedColor", typeof(Brush), typeof(VSCodeItems), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xAA, 0x31, 0x31, 0x31))));
+            DependencyProperty.Register("HighlightedColor", typeof(Brush), typeof(VSCodeItems), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0x11, 0xFF, 0xFF, 0xFF))));
 
 
         public ImageSource CheckedImageSource

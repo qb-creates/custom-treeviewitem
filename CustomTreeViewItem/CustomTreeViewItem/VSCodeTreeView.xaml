@@ -32,9 +32,10 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:VSCodeTreeView}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
-        <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -49,6 +50,7 @@
                         </Grid.RowDefinitions>
 
                         <Border x:Name="PART_Border" 
+                                SnapsToDevicePixels="True"
                                 Grid.Row="0"
                                 Background="{TemplateBinding Background}" 
                                 Cursor="{TemplateBinding Cursor}" 
@@ -59,48 +61,65 @@
                                     <ColumnDefinition MinWidth="19" Width="auto" />
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
 
-                                <Border Margin="5,0,0,0">
+                                <Border SnapsToDevicePixels="True" Margin="5,0,0,0" VerticalAlignment="Center" BorderBrush="Transparent" BorderThickness="1">
                                     <Image x:Name="PART_Expander" Source="/Images/ArrowRight.png" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
                                 </Border>
 
-                                <StackPanel Grid.Column="2" Orientation="Horizontal" >
-                                    <Button x:Name="PART_UtilityButtonOne"                        
-                                            HorizontalAlignment="right" 
-                                            Cursor="Hand"
-                                            Style="{StaticResource UtilityButtonsStyle}">
-                                        <Image Source="{TemplateBinding ButtonOneImageSource}" RenderOptions.BitmapScalingMode="HighQuality" Width="{TemplateBinding UtilityButtonSize}" Height="{TemplateBinding UtilityButtonSize}"/>
-                                    </Button>
-                                    <Button x:Name="PART_UtilityButtonTwo"             
-                                            HorizontalAlignment="right" 
-                                            Cursor="Hand"
-                                            Style="{StaticResource UtilityButtonsStyle}">
-                                        <Image Source="{TemplateBinding ButtonTwoImageSource}" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
+                                <Button x:Name="PART_UtilityButtonOne" SnapsToDevicePixels="True"    
+                                        Grid.Column="2"
+                                        Margin="0,0,1,0"
+                                        HorizontalAlignment="right"
+                                        Cursor="Hand"
+                                        Style="{StaticResource UtilityButtonsStyle}">
+                                    <Image Source="{TemplateBinding ButtonOneImageSource}" 
+                                           RenderOptions.BitmapScalingMode="HighQuality" 
+                                           Width="{TemplateBinding UtilityButtonSize}"
+                                           Height="{TemplateBinding UtilityButtonSize}">
+                                    </Image>
+                                </Button>
+                                <Button x:Name="PART_UtilityButtonTwo"      
+                                        Grid.Column="3"
+                                        Margin="0,0,1,0"
+                                        HorizontalAlignment="right" 
+                                        Cursor="Hand"
+                                        Style="{StaticResource UtilityButtonsStyle}">
+                                    <Image Source="{TemplateBinding ButtonTwoImageSource}" 
+                                           RenderOptions.BitmapScalingMode="HighQuality" 
+                                           Width="{TemplateBinding UtilityButtonSize}" 
+                                           Height="{TemplateBinding UtilityButtonSize}"/>
 
-                                    </Button>
-                                    <Button x:Name="PART_UtilityButtonThree"        
-                                            Visibility="Collapsed"
-                                            HorizontalAlignment="right" 
-                                            Cursor="Hand"
-                                            Style="{StaticResource UtilityButtonsStyle}">
-                                        <Image Source="{TemplateBinding ButtonThreeImageSource}" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
-                                    </Button>
-                                </StackPanel>
+                                </Button>
+                                <Button x:Name="PART_UtilityButtonThree"        
+                                        Grid.Column="4"
+                                        Margin="0,0,1,0"
+                                        Visibility="Collapsed"
+                                        HorizontalAlignment="right" 
+                                        Cursor="Hand"
+                                        Style="{StaticResource UtilityButtonsStyle}">
+                                    <Image Source="{TemplateBinding ButtonThreeImageSource}" 
+                                           RenderOptions.BitmapScalingMode="HighQuality" 
+                                           Width="{TemplateBinding UtilityButtonSize}" 
+                                           Height="{TemplateBinding UtilityButtonSize}"/>
+                                </Button>
 
-                                <TextBlock  Grid.Column="1" Grid.Row="0"
+                                <TextBlock  Grid.Column="1" Grid.Row="0" Padding="0,0,0,0" SnapsToDevicePixels="True"
                                             Text="{TemplateBinding Header}" 
                                             Width="auto" 
+                                            Height="auto"
                                             HorizontalAlignment="Left" 
                                             FontSize="17" 
                                             FontWeight="Bold" 
                                             Background="Transparent" 
                                             FontFamily="Global Sans Serif"
                                             Foreground="LightGray"
-                                            VerticalAlignment="Center"                                             
+                                            VerticalAlignment="Center"                                        
                                             Margin="5,0,0,0"
                                             Cursor="Hand"/>
                             </Grid>

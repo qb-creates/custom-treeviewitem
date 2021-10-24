@@ -177,13 +177,11 @@ namespace CustomTreeViewItem
                 {
                     treeView.Visibility = Visibility.Visible;
                     expander.Source = CheckedImageSource;
-                    this.BorderThickness = new Thickness(0, 0, 0, 0);
                 }
                 else
                 {
                     treeView.Visibility = Visibility.Collapsed;
                     expander.Source = UncheckedImageSource;
-                    this.BorderThickness = new Thickness(0, 0, 0, 0.5);
                 }
             }
         }

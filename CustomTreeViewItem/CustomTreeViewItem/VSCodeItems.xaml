@@ -57,60 +57,65 @@
                                     <Style.Triggers>
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="true"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="#44094771"/>
                                                 <Setter Property="BorderBrush" Value="#AA04D9FF"/>
-                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="BorderThickness" Value="0.5"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" Value="false"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                                 <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
-                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="BorderThickness" Value="0.5"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" Value="false"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="false"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="BorderBrush" Value="Transparent"/>
-                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="BorderThickness" Value="0.5"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" Value="false"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding ElementName=PART_PresenterBorder, Path=IsMouseOver}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                                 <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
-                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="BorderThickness" Value="0.5"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}" Value="false"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding ElementName=PART_Expander, Path=IsMouseOver}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
                                                 <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HighlightedColor}"/>
-                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="BorderThickness" Value="0.5"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
                                     </Style.Triggers>
@@ -123,13 +128,11 @@
                                RenderOptions.BitmapScalingMode="HighQuality" 
                                Width="15" Height="15">
                         </Image>
-
-
                         <Border x:Name="PART_PresenterBorder"
                                 Grid.Column="1" 
                                 Width="auto" 
                                 HorizontalAlignment="Left" 
-                                Margin="0,5,0,5">
+                                Margin="0,0,0,0">
                             <ContentPresenter x:Name="PART_Header"
                                             ContentSource="Header"
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
