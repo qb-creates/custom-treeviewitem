@@ -57,7 +57,6 @@
                                     <Style.Triggers>
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="true"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="true"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
@@ -69,7 +68,6 @@
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="true"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
@@ -82,7 +80,6 @@
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="false"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
@@ -95,7 +92,6 @@
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding ElementName=PART_PresenterBorder, Path=IsMouseOver}" Value="true"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>
@@ -108,7 +104,6 @@
 
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
                                                 <Condition Binding="{Binding ElementName=PART_Expander, Path=IsMouseOver}" Value="true"/>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="false"/>
                                             </MultiDataTrigger.Conditions>

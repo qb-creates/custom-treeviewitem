@@ -72,8 +72,10 @@
                                     <Image x:Name="PART_Expander" Source="/Images/ArrowRight.png" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
                                 </Border>
 
-                                <Button x:Name="PART_UtilityButtonOne" SnapsToDevicePixels="True"    
+                                <Button x:Name="PART_UtilityButtonOne" 
                                         Grid.Column="2"
+                                        SnapsToDevicePixels="True"    
+                                        Visibility="{TemplateBinding UtilityButtonOneVisibility}"
                                         Margin="0,0,1,0"
                                         HorizontalAlignment="right"
                                         Cursor="Hand"
@@ -86,22 +88,25 @@
                                 </Button>
                                 <Button x:Name="PART_UtilityButtonTwo"      
                                         Grid.Column="3"
+                                        SnapsToDevicePixels="True"    
+                                        Visibility="{TemplateBinding UtilityButtonTwoVisibility}"
                                         Margin="0,0,1,0"
                                         HorizontalAlignment="right" 
-                                        Cursor="Hand"
+                                        Cursor="Hand" 
                                         Style="{StaticResource UtilityButtonsStyle}">
-                                    <Image Source="{TemplateBinding ButtonTwoImageSource}" 
+                                    <Image x:Name="UtilityImageTwo"
+                                           Source="{TemplateBinding ButtonTwoImageSource}"
                                            RenderOptions.BitmapScalingMode="HighQuality" 
                                            Width="{TemplateBinding UtilityButtonSize}" 
                                            Height="{TemplateBinding UtilityButtonSize}"/>
-
                                 </Button>
                                 <Button x:Name="PART_UtilityButtonThree"        
                                         Grid.Column="4"
+                                        SnapsToDevicePixels="True"    
+                                        Visibility="{TemplateBinding UtilityButtonThreeVisibility}"
                                         Margin="0,0,1,0"
-                                        Visibility="Collapsed"
                                         HorizontalAlignment="right" 
-                                        Cursor="Hand"
+                                        Cursor="Hand" 
                                         Style="{StaticResource UtilityButtonsStyle}">
                                     <Image Source="{TemplateBinding ButtonThreeImageSource}" 
                                            RenderOptions.BitmapScalingMode="HighQuality" 

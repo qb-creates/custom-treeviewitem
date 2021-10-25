@@ -52,16 +52,17 @@ namespace CustomTreeViewItem
             DependencyProperty.Register("UncheckedImageSource", typeof(ImageSource), typeof(VSCodeItems), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/ArrowRight.png"))));
 
 
-
-        public bool ItemSelected
+        internal bool ItemSelected
         {
             get { return (bool)GetValue(ItemSelectedProperty); }
             set { SetValue(ItemSelectedProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ItemSelected.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for Focused.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSelectedProperty =
             DependencyProperty.Register("ItemSelected", typeof(bool), typeof(VSCodeItems), new PropertyMetadata(false));
+
+
 
 
     }

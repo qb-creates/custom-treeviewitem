@@ -94,5 +94,8 @@
     <Resource Include="Images\ArrowDown.png" />
     <Resource Include="Images\ArrowRight.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaceholderIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

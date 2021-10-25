@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace CustomTreeViewItem
         private Button utilityButtonTwo;
         private Button utilityButtonThree;
         private Image expander;
+        private VSCodeItems newFocusedItem;
+        private VSCodeItems oldFocusedItem;
         private bool isChecked = false;
         private bool isMouseOverUtility = false;
         public List<TreeViewItem> MyItemSource
@@ -66,7 +69,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for ButtonOneImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonOneImageSourceProperty =
-            DependencyProperty.Register("ButtonOneImageSource", typeof(ImageSource), typeof(VSCodeTreeView));
+            DependencyProperty.Register("ButtonOneImageSource", typeof(ImageSource), typeof(VSCodeTreeView), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/PlaceholderIcon.png"))));
 
         public ImageSource UtilityButtonTwoImageSource
         {
@@ -76,7 +79,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for ButtonTwoImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonTwoImageSourceProperty =
-            DependencyProperty.Register("ButtonTwoImageSource", typeof(ImageSource), typeof(VSCodeTreeView));
+            DependencyProperty.Register("ButtonTwoImageSource", typeof(ImageSource), typeof(VSCodeTreeView), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/PlaceholderIcon.png"))));
 
         public ImageSource UtilityButtonThreeImageSource
         {
@@ -86,12 +89,45 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for ButtonThreeImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ButtonThreeImageSourceProperty =
-            DependencyProperty.Register("ButtonThreeImageSource", typeof(ImageSource), typeof(VSCodeTreeView));
+            DependencyProperty.Register("ButtonThreeImageSource", typeof(ImageSource), typeof(VSCodeTreeView), new PropertyMetadata(new BitmapImage(new Uri("pack://application:,,,/CustomTreeViewItem;Component/Images/PlaceholderIcon.png"))));
         public double UtilityButtonSize
         {
             get { return (double)GetValue(UtilityButtonSizeProperty); }
             set { SetValue(UtilityButtonSizeProperty, value); }
         }
+
+
+        public Visibility UtilityButtonOneVisibility
+        {
+            get { return (Visibility)GetValue(UtilityButtonOneVisibilityProperty); }
+            set { SetValue(UtilityButtonOneVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for UtilityButtonOneVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UtilityButtonOneVisibilityProperty =
+            DependencyProperty.Register("UtilityButtonOneVisibility", typeof(Visibility), typeof(VSCodeTreeView), new PropertyMetadata(Visibility.Collapsed));
+
+
+
+        public Visibility UtilityButtonTwoVisibility
+        {
+            get { return (Visibility)GetValue(UtilityButtonTwoVisibilityProperty); }
+            set { SetValue(UtilityButtonTwoVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for UtilityButtonTwoVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UtilityButtonTwoVisibilityProperty =
+            DependencyProperty.Register("UtilityButtonTwoVisibility", typeof(Visibility), typeof(VSCodeTreeView), new PropertyMetadata(Visibility.Collapsed));
+
+        public Visibility UtilityButtonThreeVisibility
+        {
+            get { return (Visibility)GetValue(UtilityButtonThreeVisibilityProperty); }
+            set { SetValue(UtilityButtonThreeVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for UtilityButtonThreeVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UtilityButtonThreeVisibilityProperty =
+            DependencyProperty.Register("UtilityButtonThreeVisibility", typeof(Visibility), typeof(VSCodeTreeView), new PropertyMetadata(Visibility.Collapsed));
 
         // Using a DependencyProperty as the backing store for UtilityButtonSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UtilityButtonSizeProperty =
@@ -121,21 +157,9 @@ namespace CustomTreeViewItem
             utilityButtonTwo = (Button)GetTemplateChild("PART_UtilityButtonTwo");
             utilityButtonThree = (Button)GetTemplateChild("PART_UtilityButtonThree");
 
-            if (UtilityButtonOneImageSource == null)
-                utilityButtonOne.Visibility = Visibility.Collapsed;
-            else
-                utilityButtonOne.Visibility = Visibility.Visible;
-            if (UtilityButtonTwoImageSource == null)
-                utilityButtonTwo.Visibility = Visibility.Collapsed;
-            else
-                utilityButtonTwo.Visibility = Visibility.Visible;
-            if (UtilityButtonThreeImageSource == null)
-                utilityButtonThree.Visibility = Visibility.Collapsed;
-            else
-                utilityButtonThree.Visibility = Visibility.Visible;
-
+            treeView.MouseLeftButtonUp += VSCodeTreeView_MouseLeftButtonUp;
             treeView.Visibility = Visibility.Collapsed;
-
+            treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             utilityButtonOne.MouseEnter += UtilityButton_MouseEnter;
             utilityButtonOne.MouseLeave += UtilityButton_MouseLeave;
             utilityButtonTwo.MouseEnter += UtilityButton_MouseEnter;
@@ -148,13 +172,22 @@ namespace CustomTreeViewItem
             expander.Source = UncheckedImageSource;
         }
 
-        private void UtilityButtonOne_Click(object sender, RoutedEventArgs e)
+        private void VSCodeTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (oldFocusedItem != null)
+                oldFocusedItem.ItemSelected = false;
+            if(newFocusedItem != null)
+                newFocusedItem.ItemSelected = true;
         }
 
-        private void UtilityButtonOne_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            oldFocusedItem = (e.OldValue as VSCodeItems);
+            newFocusedItem = (e.NewValue as VSCodeItems);
+        }
 
+        private void UtilityButtonOne_Click(object sender, RoutedEventArgs e)
+        {
         }
 
         private void UtilityButton_MouseLeave(object sender, MouseEventArgs e)

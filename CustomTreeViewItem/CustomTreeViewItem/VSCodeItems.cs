@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,24 +42,12 @@ namespace CustomTreeViewItem
             expander = (Image)GetTemplateChild("PART_Expander");
             presenterBorder = (Border)GetTemplateChild("PART_PresenterBorder");
 
-            this.GotFocus += VSCodeItems_GotFocus;
-            this.LostFocus += VSCodeItems_LostFocus;
             this.MouseDoubleClick += VSCodeItems_MouseDoubleClick;
             fullBorder.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
             expander.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
             presenterBorder.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
     
             expander.Source = UncheckedImageSource;
-        }
-
-        private void VSCodeItems_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ItemSelected = false;
-        }
-
-        private void VSCodeItems_GotFocus(object sender, RoutedEventArgs e)
-        {
-            ItemSelected = true;
         }
 
         private void VSCodeItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
