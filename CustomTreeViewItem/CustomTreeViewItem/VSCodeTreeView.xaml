@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CustomTreeViewItem">
 
+    <!--Style for by Three utility buttons-->
     <Style x:Key="UtilityButtonsStyle" TargetType="{x:Type Button}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -31,6 +32,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--Custom TreeView Control-->
     <Style TargetType="{x:Type local:VSCodeTreeView}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -48,7 +51,9 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
+                        
+                        <!--My header to my TreeView. Consist of a Border with a textblock for content, 3 utility button slots and an expander image to represent
+                            the Checked and unchecked stated of the treeview header.-->
                         <Border x:Name="PART_Border" 
                                 SnapsToDevicePixels="True"
                                 Grid.Row="0"
@@ -67,11 +72,13 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-
+                                
+                                <!--Expander Image-->
                                 <Border SnapsToDevicePixels="True" Margin="5,0,0,0" VerticalAlignment="Center" BorderBrush="Transparent" BorderThickness="1">
                                     <Image x:Name="PART_Expander" Source="/Images/ArrowRight.png" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
                                 </Border>
 
+                                <!--Three utitlity Buttons-->
                                 <Button x:Name="PART_UtilityButtonOne" 
                                         Grid.Column="2"
                                         SnapsToDevicePixels="True"    
@@ -113,7 +120,8 @@
                                            Width="{TemplateBinding UtilityButtonSize}" 
                                            Height="{TemplateBinding UtilityButtonSize}"/>
                                 </Button>
-
+                                
+                                <!--Header TextBlock-->
                                 <TextBlock  Grid.Column="1" Grid.Row="0" Padding="0,0,0,0" SnapsToDevicePixels="True"
                                             Text="{TemplateBinding Header}" 
                                             Width="auto" 
@@ -129,7 +137,8 @@
                                             Cursor="Hand"/>
                             </Grid>
                         </Border>
-
+                        
+                        <!--TreeView that will actuall hold all of our TreeView Items-->
                         <TreeView Name="PART_TreeView"
                                   Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility ="Disabled"
                                       ItemsSource="{TemplateBinding MyItemSource}"

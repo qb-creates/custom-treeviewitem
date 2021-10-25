@@ -51,6 +51,7 @@
     <Compile Include="VSCodeTreeView.cs" />
     <Compile Include="VSCodeItems.hidden.cs" />
     <Compile Include="VSCodeItems.properties.cs" />
+    <Compile Include="VSCodeTreeView.properties.cs" />
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
