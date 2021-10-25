@@ -51,7 +51,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <!--My header to my TreeView. Consist of a Border with a textblock for content, 3 utility button slots and an expander image to represent
                             the Checked and unchecked stated of the treeview header.-->
                         <Border x:Name="PART_Border" 
@@ -72,7 +72,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-                                
+
                                 <!--Expander Image-->
                                 <Border SnapsToDevicePixels="True" Margin="5,0,0,0" VerticalAlignment="Center" BorderBrush="Transparent" BorderThickness="1">
                                     <Image x:Name="PART_Expander" Source="/Images/ArrowRight.png" RenderOptions.BitmapScalingMode="HighQuality" Width="15" Height="15"/>
@@ -120,9 +120,9 @@
                                            Width="{TemplateBinding UtilityButtonSize}" 
                                            Height="{TemplateBinding UtilityButtonSize}"/>
                                 </Button>
-                                
+
                                 <!--Header TextBlock-->
-                                <TextBlock  Grid.Column="1" Grid.Row="0" Padding="0,0,0,0" SnapsToDevicePixels="True"
+                                <TextBlock  Grid.Column="1" Grid.Row="0" Padding="0,2,0,2" SnapsToDevicePixels="True"
                                             Text="{TemplateBinding Header}" 
                                             Width="auto" 
                                             Height="auto"
@@ -137,10 +137,17 @@
                                             Cursor="Hand"/>
                             </Grid>
                         </Border>
-                        
+
                         <!--TreeView that will actuall hold all of our TreeView Items-->
-                        <TreeView Name="PART_TreeView"
-                                  Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility ="Disabled"
+                        <Grid Name="PART_TreeViewGrid" Grid.Row="1" MaxHeight="400" MinHeight="0" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+                            <TreeView Name="PART_TreeView" 
+                                      Grid.Row="0"
+                                      ScrollViewer.HorizontalScrollBarVisibility ="Disabled"
+                                      Visibility="Visible"
                                       ItemsSource="{TemplateBinding MyItemSource}"
                                       HorizontalAlignment="Left" 
                                       VerticalAlignment="Top" 
@@ -153,7 +160,8 @@
                                       Foreground="LightGray"
                                       BorderThickness="0"
                                       Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
-                        </TreeView>
+                            </TreeView>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

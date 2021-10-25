@@ -51,10 +51,23 @@
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="true"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="#44094771"/>
                                                 <Setter Property="BorderBrush" Value="#AA04D9FF"/>
+                                                <Setter Property="BorderThickness" Value="0.5"/>
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Background" Value="#22FFFFFF"/>
+                                                <Setter Property="BorderBrush" Value="#22FFFFFF"/>
                                                 <Setter Property="BorderThickness" Value="0.5"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
@@ -131,6 +144,7 @@
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
                                         <Setter Property="MaxWidth" Value="200"/>
+                                        <Setter Property="Padding" Value="0,2,0,2"/>
                                     </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -6,7 +7,7 @@ namespace CustomTreeViewItem
 {
     public partial class VSCodeTreeView : Control
     {
-
+        private Grid treeViewGrid;
         private TreeView treeView;
         private Border border;
         private Button utilityButtonOne;
@@ -21,6 +22,7 @@ namespace CustomTreeViewItem
 
         public override void OnApplyTemplate()
         {
+            treeViewGrid = (Grid)GetTemplateChild("PART_TreeViewGrid");
             treeView = (TreeView)GetTemplateChild("PART_TreeView");
             border = (Border)GetTemplateChild("PART_Border");
             expander = (Image)GetTemplateChild("PART_Expander");
@@ -29,7 +31,6 @@ namespace CustomTreeViewItem
             utilityButtonThree = (Button)GetTemplateChild("PART_UtilityButtonThree");
 
             treeView.MouseLeftButtonUp += VSCodeTreeView_MouseLeftButtonUp;
-            treeView.Visibility = Visibility.Collapsed;
             treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             utilityButtonOne.MouseEnter += UtilityButton_MouseEnter;
             utilityButtonOne.MouseLeave += UtilityButton_MouseLeave;
@@ -59,6 +60,7 @@ namespace CustomTreeViewItem
 
         private void UtilityButtonOne_Click(object sender, RoutedEventArgs e)
         {
+      
         }
 
         private void UtilityButton_MouseLeave(object sender, MouseEventArgs e)
@@ -79,12 +81,13 @@ namespace CustomTreeViewItem
 
                 if (isChecked)
                 {
-                    treeView.Visibility = Visibility.Visible;
+                    treeViewGrid.Visibility = Visibility.Visible;
                     expander.Source = CheckedImageSource;
+                    
                 }
                 else
                 {
-                    treeView.Visibility = Visibility.Collapsed;
+                    treeViewGrid.Visibility = Visibility.Collapsed;
                     expander.Source = UncheckedImageSource;
                 }
             }
