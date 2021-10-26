@@ -1,13 +1,15 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace CustomTreeViewItem
 {
     public partial class VSCodeTreeView : Control
     {
-        private Grid treeViewGrid;
+        private Border treeViewGrid;
         private TreeView treeView;
         private Border border;
         private Button utilityButtonOne;
@@ -18,11 +20,10 @@ namespace CustomTreeViewItem
         private VSCodeItems oldFocusedItem;
         private bool isChecked = false;
         private bool isMouseOverUtility = false;
-        
 
         public override void OnApplyTemplate()
         {
-            treeViewGrid = (Grid)GetTemplateChild("PART_TreeViewGrid");
+            treeViewGrid = (Border)GetTemplateChild("PART_TreeViewGrid");
             treeView = (TreeView)GetTemplateChild("PART_TreeView");
             border = (Border)GetTemplateChild("PART_Border");
             expander = (Image)GetTemplateChild("PART_Expander");
@@ -81,14 +82,16 @@ namespace CustomTreeViewItem
 
                 if (isChecked)
                 {
-                    treeViewGrid.Visibility = Visibility.Visible;
                     expander.Source = CheckedImageSource;
-                    
+                    DoubleAnimation treeViewAnimation = new DoubleAnimation(0, treeView.ActualHeight, TimeSpan.FromMilliseconds(200));
+                    treeViewGrid.BeginAnimation(Grid.HeightProperty, treeViewAnimation);
+                    treeViewGrid.Height = Double.NaN;
                 }
                 else
                 {
-                    treeViewGrid.Visibility = Visibility.Collapsed;
                     expander.Source = UncheckedImageSource;
+                    DoubleAnimation treeViewAnimation = new DoubleAnimation(treeView.ActualHeight, 0, TimeSpan.FromMilliseconds(200));
+                    treeViewGrid.BeginAnimation(Grid.HeightProperty, treeViewAnimation);
                 }
             }
         }
