@@ -135,7 +135,7 @@
                         <Border x:Name="PART_PresenterBorder"
                                 Grid.Column="1" 
                                 Width="auto" 
-                                HorizontalAlignment="Left" 
+                                HorizontalAlignment="Left" TextBlock.Foreground="{TemplateBinding TextColor}"
                                 Margin="0,0,0,0">
                             <ContentPresenter x:Name="PART_Header"
                                             ContentSource="Header"
