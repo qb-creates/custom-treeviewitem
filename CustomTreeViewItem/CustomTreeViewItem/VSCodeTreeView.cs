@@ -12,6 +12,7 @@ namespace CustomTreeViewItem
         private Border treeViewGrid;
         private TreeView treeView;
         private Border border;
+        private StackPanel utilityButtonContainer;
         private Button utilityButtonOne;
         private Button utilityButtonTwo;
         private Button utilityButtonThree;
@@ -27,6 +28,7 @@ namespace CustomTreeViewItem
             treeView = (TreeView)GetTemplateChild("PART_TreeView");
             border = (Border)GetTemplateChild("PART_Border");
             expander = (Image)GetTemplateChild("PART_Expander");
+            utilityButtonContainer = (StackPanel)GetTemplateChild("PART_UtilityButtonContainer");
             utilityButtonOne = (Button)GetTemplateChild("PART_UtilityButtonOne");
             utilityButtonTwo = (Button)GetTemplateChild("PART_UtilityButtonTwo");
             utilityButtonThree = (Button)GetTemplateChild("PART_UtilityButtonThree");
@@ -44,7 +46,6 @@ namespace CustomTreeViewItem
 
             expander.Source = UncheckedImageSource;
         }
-
         private void VSCodeTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (oldFocusedItem != null)
@@ -86,12 +87,14 @@ namespace CustomTreeViewItem
                     DoubleAnimation treeViewAnimation = new DoubleAnimation(0, treeView.ActualHeight, TimeSpan.FromMilliseconds(200));
                     treeViewGrid.BeginAnimation(Grid.HeightProperty, treeViewAnimation);
                     treeViewGrid.Height = Double.NaN;
+                    utilityButtonContainer.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     expander.Source = UncheckedImageSource;
                     DoubleAnimation treeViewAnimation = new DoubleAnimation(treeView.ActualHeight, 0, TimeSpan.FromMilliseconds(200));
                     treeViewGrid.BeginAnimation(Grid.HeightProperty, treeViewAnimation);
+                    utilityButtonContainer.Visibility = Visibility.Hidden;
                 }
             }
         }
