@@ -20,7 +20,7 @@ namespace CustomTreeViewItem
 
         public void AddItem(VSCodeItems newItem)
         {
-            newItem.MarginThickness  = new Thickness(9990, 0, 5, 0);
+            newItem.MarginThickness  = new Thickness(10000, 0, 5, 0);
             Items.Add(newItem); 
         }
         public override void OnApplyTemplate()

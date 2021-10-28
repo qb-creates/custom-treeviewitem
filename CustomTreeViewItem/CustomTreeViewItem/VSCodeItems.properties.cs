@@ -15,7 +15,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for MarginThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MarginThicknessProperty =
-            DependencyProperty.Register("MarginThickness", typeof(Thickness), typeof(VSCodeItems), new PropertyMetadata(new Thickness(10015, 0, 5, 0)));
+            DependencyProperty.Register("MarginThickness", typeof(Thickness), typeof(VSCodeItems), new PropertyMetadata(new Thickness(10025, 0, 5, 0)));
 
         public Brush HighlightedColor
         {
@@ -66,7 +66,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextColorProperty =
-            DependencyProperty.Register("TextColor", typeof(SolidColorBrush), typeof(VSCodeItems), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register("TextColor", typeof(SolidColorBrush), typeof(VSCodeItems), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xDC, 0xDC, 0xDC))));
 
 
 

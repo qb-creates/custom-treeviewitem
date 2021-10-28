@@ -42,6 +42,7 @@
                         <!--My full border around the TreeView Item. Will Edit the border and background of this to show that a item has been selected. -->
                         <Border x:Name="PART_FullBorder" 
                                 Grid.Column="0" Grid.ColumnSpan="3"
+                                Grid.Row="0"
                                 Width="11000"
                                 Padding="0"
                                 HorizontalAlignment="Left">
@@ -55,8 +56,8 @@
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="#44094771"/>
-                                                <Setter Property="BorderBrush" Value="#AA04D9FF"/>
-                                                <Setter Property="BorderThickness" Value="0.5"/>
+                                                <Setter Property="BorderBrush" Value="red"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
                                             </MultiDataTrigger.Setters>
                                         </MultiDataTrigger>
 
@@ -122,6 +123,13 @@
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
+                            <Border.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Cut"/>
+                                    <MenuItem Header="Copy"/>
+                                    <MenuItem Header="Paste"/>
+                                </ContextMenu>
+                            </Border.ContextMenu>
                         </Border>
                         
                         <!--My Expander Image. Defualts to a right and down arrow.-->
@@ -136,7 +144,7 @@
                                 Grid.Column="1" 
                                 Width="auto" 
                                 HorizontalAlignment="Left" TextBlock.Foreground="{TemplateBinding TextColor}"
-                                Margin="0,0,0,0">
+                                Margin="3,0,0,0">
                             <ContentPresenter x:Name="PART_Header"
                                             ContentSource="Header"
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
@@ -144,7 +152,7 @@
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
                                         <Setter Property="MaxWidth" Value="200"/>
-                                        <Setter Property="Padding" Value="0,2,0,2"/>
+                                        <Setter Property="Padding" Value="0,5,0,5"/>
                                     </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>

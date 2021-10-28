@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,14 +10,16 @@ namespace CustomTreeViewItem
 {
     public partial class VSCodeTreeView : Control
     {
-        private Border treeViewGrid;
+        public delegate void ExpandedEventHandler(object sender, EventArgs args);
+        public event ExpandedEventHandler OnTreeViewExpanded; 
+        private Border treeViewContainer;
         private TreeView treeView;
-        private Border border;
+        private Button buttonContainer;
         private StackPanel utilityButtonContainer;
         private Button utilityButtonOne;
         private Button utilityButtonTwo;
         private Button utilityButtonThree;
-        private Image expander;
+        private Image expanderImage;
         private VSCodeItems newFocusedItem;
         private VSCodeItems oldFocusedItem;
         private bool isChecked = false;
@@ -24,10 +27,10 @@ namespace CustomTreeViewItem
 
         public override void OnApplyTemplate()
         {
-            treeViewGrid = (Border)GetTemplateChild("PART_TreeViewGrid");
+            buttonContainer = (Button)GetTemplateChild("PART_ButtonContainer");
+            treeViewContainer = (Border)GetTemplateChild("PART_TreeViewContainer");
             treeView = (TreeView)GetTemplateChild("PART_TreeView");
-            border = (Border)GetTemplateChild("PART_Border");
-            expander = (Image)GetTemplateChild("PART_Expander");
+            expanderImage = (Image)GetTemplateChild("PART_Expander");
             utilityButtonContainer = (StackPanel)GetTemplateChild("PART_UtilityButtonContainer");
             utilityButtonOne = (Button)GetTemplateChild("PART_UtilityButtonOne");
             utilityButtonTwo = (Button)GetTemplateChild("PART_UtilityButtonTwo");
@@ -41,11 +44,12 @@ namespace CustomTreeViewItem
             utilityButtonTwo.MouseLeave += UtilityButton_MouseLeave;
             utilityButtonThree.MouseEnter += UtilityButton_MouseEnter;
             utilityButtonThree.MouseLeave += UtilityButton_MouseLeave;
-            border.PreviewMouseLeftButtonUp += Border_PreviewMouseLeftButtonUp;
+            buttonContainer.PreviewMouseLeftButtonUp += Border_PreviewMouseLeftButtonUp;
             utilityButtonOne.Click += UtilityButtonOne_Click;
 
-            expander.Source = UncheckedImageSource;
+            expanderImage.Source = UncheckedImageSource;
         }
+
         private void VSCodeTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (oldFocusedItem != null)
@@ -80,22 +84,34 @@ namespace CustomTreeViewItem
             if (!isMouseOverUtility)
             {
                 isChecked = !isChecked;
-
+                
                 if (isChecked)
                 {
-                    expander.Source = CheckedImageSource;
+                    expanderImage.Source = CheckedImageSource;
                     DoubleAnimation treeViewAnimation = new DoubleAnimation(0, treeView.ActualHeight, TimeSpan.FromMilliseconds(200));
-                    treeViewGrid.BeginAnimation(Grid.HeightProperty, treeViewAnimation);
-                    treeViewGrid.Height = Double.NaN;
+                    treeViewContainer.BeginAnimation(Border.HeightProperty, treeViewAnimation);
+                    treeViewContainer.Height = Double.NaN;
                     utilityButtonContainer.Visibility = Visibility.Visible;
+                    OnTreeViewExpanded?.Invoke(this, new EventArgs());
                 }
                 else
                 {
-                    expander.Source = UncheckedImageSource;
+                    expanderImage.Source = UncheckedImageSource;
                     DoubleAnimation treeViewAnimation = new DoubleAnimation(treeView.ActualHeight, 0, TimeSpan.FromMilliseconds(200));
-                    treeViewGrid.BeginAnimation(Grid.HeightProperty, treeViewAnimation);
+                    treeViewContainer.BeginAnimation(Border.HeightProperty, treeViewAnimation);
                     utilityButtonContainer.Visibility = Visibility.Hidden;
                 }
+            }
+        }
+        public void CollaspeTreeView()
+        {
+            if (isChecked)
+            {
+                isChecked = false;
+                expanderImage.Source = UncheckedImageSource;
+                DoubleAnimation treeViewAnimation = new DoubleAnimation(treeView.ActualHeight, 0, TimeSpan.FromMilliseconds(200));
+                treeViewContainer.BeginAnimation(Border.HeightProperty, treeViewAnimation);
+                utilityButtonContainer.Visibility = Visibility.Hidden;
             }
         }
         public void AddItem(TreeViewItem item)
