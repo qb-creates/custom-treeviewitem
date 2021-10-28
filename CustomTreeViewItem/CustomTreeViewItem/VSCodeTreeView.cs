@@ -20,8 +20,6 @@ namespace CustomTreeViewItem
         private Button utilityButtonTwo;
         private Button utilityButtonThree;
         private Image expanderImage;
-        private VSCodeItems newFocusedItem;
-        private VSCodeItems oldFocusedItem;
         private bool isChecked = false;
         private bool isMouseOverUtility = false;
 
@@ -52,16 +50,16 @@ namespace CustomTreeViewItem
 
         private void VSCodeTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (oldFocusedItem != null)
-                oldFocusedItem.ItemSelected = false;
-            if(newFocusedItem != null)
-                newFocusedItem.ItemSelected = true;
+            if (OldItem != null)
+                OldItem.ItemSelected = false;
+            if(CurrentItem != null)
+                CurrentItem.ItemSelected = true;
         }
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            oldFocusedItem = (e.OldValue as VSCodeItems);
-            newFocusedItem = (e.NewValue as VSCodeItems);
+            OldItem = (e.OldValue as VSCodeItems);
+            CurrentItem = (e.NewValue as VSCodeItems);
         }
 
         private void UtilityButtonOne_Click(object sender, RoutedEventArgs e)

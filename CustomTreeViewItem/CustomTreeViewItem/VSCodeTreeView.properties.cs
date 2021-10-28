@@ -9,15 +9,17 @@ namespace CustomTreeViewItem
 {
     public partial class VSCodeTreeView
     {
-        public List<TreeViewItem> MyItemSource
+        public VSCodeItems OldItem { get; private set; }
+        public VSCodeItems CurrentItem { get; private set; }
+        public List<VSCodeItems> MyItemSource
         {
-            get { return (List<TreeViewItem>)GetValue(MyItemSourceProperty); }
+            get { return (List<VSCodeItems>)GetValue(MyItemSourceProperty); }
             set { SetValue(MyItemSourceProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyItemSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyItemSourceProperty =
-            DependencyProperty.Register("MyItemSource", typeof(List<TreeViewItem>), typeof(VSCodeTreeView), new PropertyMetadata(null));
+            DependencyProperty.Register("MyItemSource", typeof(List<VSCodeItems>), typeof(VSCodeTreeView), new PropertyMetadata(null));
 
         public ImageSource CheckedImageSource
         {

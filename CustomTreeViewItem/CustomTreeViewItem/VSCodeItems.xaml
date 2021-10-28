@@ -123,13 +123,6 @@
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
-                            <Border.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Cut"/>
-                                    <MenuItem Header="Copy"/>
-                                    <MenuItem Header="Paste"/>
-                                </ContextMenu>
-                            </Border.ContextMenu>
                         </Border>
                         
                         <!--My Expander Image. Defualts to a right and down arrow.-->
