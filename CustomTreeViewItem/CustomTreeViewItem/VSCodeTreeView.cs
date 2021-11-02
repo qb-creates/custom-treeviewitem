@@ -10,7 +10,7 @@ namespace CustomTreeViewItem
 {
     public partial class VSCodeTreeView : Control
     {
-        public delegate void ExpandedEventHandler(object sender, EventArgs args);
+        public delegate void ExpandedEventHandler(VSCodeTreeView sender, EventArgs args);
         public event ExpandedEventHandler OnTreeViewExpanded; 
         private Border treeViewContainer;
         private TreeView treeView;
