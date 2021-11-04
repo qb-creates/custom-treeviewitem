@@ -61,10 +61,19 @@ namespace CustomTreeViewItem
 
         public void UnSubscribeEvents()
         {
+            fullBorder = (Border)GetTemplateChild("PART_FullBorder");
+            expander = (Image)GetTemplateChild("PART_Expander");
+            presenterBorder = (Border)GetTemplateChild("PART_PresenterBorder");
+
             this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
             fullBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
             expander.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
             presenterBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+
+            foreach(VSCodeItems item in this.Items)
+            {
+                item.UnSubscribeEvents();
+            }
         }
     }
 }

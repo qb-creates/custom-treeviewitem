@@ -68,8 +68,5 @@ namespace CustomTreeViewItem
         public static readonly DependencyProperty TextColorProperty =
             DependencyProperty.Register("TextColor", typeof(SolidColorBrush), typeof(VSCodeItems), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(0xFF, 0xDC, 0xDC, 0xDC))));
 
-
-
-
     }
 }

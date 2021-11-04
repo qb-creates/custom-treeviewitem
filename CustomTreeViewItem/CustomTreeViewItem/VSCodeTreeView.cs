@@ -47,6 +47,19 @@ namespace CustomTreeViewItem
 
             expanderImage.Source = UncheckedImageSource;
         }
+        public void UnsubscribeEvents()
+        {
+            treeView.MouseLeftButtonUp -= VSCodeTreeView_MouseLeftButtonUp;
+            treeView.SelectedItemChanged -= TreeView_SelectedItemChanged;
+            utilityButtonOne.MouseEnter -= UtilityButton_MouseEnter;
+            utilityButtonOne.MouseLeave -= UtilityButton_MouseLeave;
+            utilityButtonTwo.MouseEnter -= UtilityButton_MouseEnter;
+            utilityButtonTwo.MouseLeave -= UtilityButton_MouseLeave;
+            utilityButtonThree.MouseEnter -= UtilityButton_MouseEnter;
+            utilityButtonThree.MouseLeave -= UtilityButton_MouseLeave;
+            buttonContainer.PreviewMouseLeftButtonUp -= Border_PreviewMouseLeftButtonUp;
+            utilityButtonOne.Click -= UtilityButtonOne_Click;
+        }
 
         private void VSCodeTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -115,6 +128,14 @@ namespace CustomTreeViewItem
         public void AddItem(TreeViewItem item)
         {
             treeView.Items.Add(item);
+        }
+        public void ClearTreeView()
+        {
+            foreach (VSCodeItems item in treeView.Items)
+            {
+                item.UnSubscribeEvents();
+            }
+            //treeView.Items.Clear();
         }
     }
 }
