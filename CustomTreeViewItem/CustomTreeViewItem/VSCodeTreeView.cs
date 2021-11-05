@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -11,7 +12,13 @@ namespace CustomTreeViewItem
     public partial class VSCodeTreeView : Control
     {
         public delegate void ExpandedEventHandler(VSCodeTreeView sender, EventArgs args);
-        public event ExpandedEventHandler OnTreeViewExpanded; 
+        public event ExpandedEventHandler OnTreeViewExpanded;
+        public delegate void UtilityButtonOneEventHandler(VSCodeTreeView sender, EventArgs args);
+        public event UtilityButtonOneEventHandler OnUtilityButtonOneClicked;
+        public delegate void UtilityButtonTwoEventHandler(VSCodeTreeView sender, EventArgs args);
+        public event UtilityButtonTwoEventHandler OnUtilityButtonTwoClicked;
+        public delegate void UtilityButtonThreeEventHandler(VSCodeTreeView sender, EventArgs args);
+        public event UtilityButtonThreeEventHandler OnUtilityButtonThreeClicked;
         private Border treeViewContainer;
         private TreeView treeView;
         private Button buttonContainer;
@@ -44,9 +51,11 @@ namespace CustomTreeViewItem
             utilityButtonThree.MouseLeave += UtilityButton_MouseLeave;
             buttonContainer.PreviewMouseLeftButtonUp += Border_PreviewMouseLeftButtonUp;
             utilityButtonOne.Click += UtilityButtonOne_Click;
-
+            utilityButtonTwo.Click += UtilityButtonTwo_Click;
+            utilityButtonThree.Click += UtilityButtonThree_Click;
             expanderImage.Source = UncheckedImageSource;
         }
+
         public void UnsubscribeEvents()
         {
             treeView.MouseLeftButtonUp -= VSCodeTreeView_MouseLeftButtonUp;
@@ -59,6 +68,8 @@ namespace CustomTreeViewItem
             utilityButtonThree.MouseLeave -= UtilityButton_MouseLeave;
             buttonContainer.PreviewMouseLeftButtonUp -= Border_PreviewMouseLeftButtonUp;
             utilityButtonOne.Click -= UtilityButtonOne_Click;
+            utilityButtonTwo.Click -= UtilityButtonTwo_Click;
+            utilityButtonThree.Click -= UtilityButtonThree_Click;
         }
 
         private void VSCodeTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -77,7 +88,17 @@ namespace CustomTreeViewItem
 
         private void UtilityButtonOne_Click(object sender, RoutedEventArgs e)
         {
-      
+            OnUtilityButtonOneClicked?.Invoke(this, new EventArgs());
+        }
+
+        private void UtilityButtonTwo_Click(object sender, RoutedEventArgs e)
+        {
+            OnUtilityButtonTwoClicked?.Invoke(this, new EventArgs());
+        }
+
+        private void UtilityButtonThree_Click(object sender, RoutedEventArgs e)
+        {
+            OnUtilityButtonThreeClicked?.Invoke(this, new EventArgs());
         }
 
         private void UtilityButton_MouseLeave(object sender, MouseEventArgs e)
@@ -114,7 +135,7 @@ namespace CustomTreeViewItem
                 }
             }
         }
-        public void CollaspeTreeView()
+        public void CollaspeTreeView(bool collapseChildren)
         {
             if (isChecked)
             {
@@ -124,7 +145,15 @@ namespace CustomTreeViewItem
                 treeViewContainer.BeginAnimation(Border.HeightProperty, treeViewAnimation);
                 utilityButtonContainer.Visibility = Visibility.Hidden;
             }
+            if (collapseChildren)
+            {
+                foreach (VSCodeItems item in treeView.Items)
+                {
+                    item.Collaspe();
+                }
+            }
         }
+
         public void AddItem(TreeViewItem item)
         {
             treeView.Items.Add(item);
@@ -135,7 +164,7 @@ namespace CustomTreeViewItem
             {
                 item.UnSubscribeEvents();
             }
-            //treeView.Items.Clear();
+            MyItemSource = new List<VSCodeItems>();
         }
     }
 }

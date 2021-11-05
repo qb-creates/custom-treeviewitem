@@ -9,6 +9,7 @@ namespace CustomTreeViewItem
         private Border fullBorder;
         private Border presenterBorder;
         private Image expander;
+        private bool applyTemplateComplete;
         private bool isChecked = false;
 
         static VSCodeItems()
@@ -33,8 +34,9 @@ namespace CustomTreeViewItem
             fullBorder.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
             expander.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
             presenterBorder.MouseLeftButtonUp += TreeViewItem_MouseLeftButtonUp;
-    
+            
             expander.Source = UncheckedImageSource;
+            applyTemplateComplete = true;
         }
 
         private void VSCodeItems_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -57,18 +59,29 @@ namespace CustomTreeViewItem
             }
         }
       
-
+        public void Collaspe()
+        {
+            if (isChecked)
+            {
+                isChecked = false;
+                this.IsExpanded = false;
+                expander.Source = UncheckedImageSource;
+            }
+            foreach (VSCodeItems item in this.Items)
+            {
+                item.Collaspe();
+            }
+        }
 
         public void UnSubscribeEvents()
         {
-            fullBorder = (Border)GetTemplateChild("PART_FullBorder");
-            expander = (Image)GetTemplateChild("PART_Expander");
-            presenterBorder = (Border)GetTemplateChild("PART_PresenterBorder");
-
             this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;
-            fullBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
-            expander.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
-            presenterBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+            if (applyTemplateComplete != false)
+            {
+                fullBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+                expander.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+                presenterBorder.MouseLeftButtonUp -= TreeViewItem_MouseLeftButtonUp;
+            }
 
             foreach(VSCodeItems item in this.Items)
             {

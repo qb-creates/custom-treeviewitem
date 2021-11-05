@@ -19,7 +19,7 @@ namespace CustomTreeViewItem
 
         // Using a DependencyProperty as the backing store for MyItemSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyItemSourceProperty =
-            DependencyProperty.Register("MyItemSource", typeof(List<VSCodeItems>), typeof(VSCodeTreeView), new PropertyMetadata(null));
+            DependencyProperty.Register("MyItemSource", typeof(List<VSCodeItems>), typeof(VSCodeTreeView), new PropertyMetadata(new List<VSCodeItems>()));
 
         public ImageSource CheckedImageSource
         {
