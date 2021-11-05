@@ -57,7 +57,21 @@ namespace CustomTreeViewItem
         // Using a DependencyProperty as the backing store for Focused.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSelectedProperty =
             DependencyProperty.Register("ItemSelected", typeof(bool), typeof(VSCodeItems), new PropertyMetadata(false));
-        
+
+
+
+        internal bool ItemFocused
+        {
+            get { return (bool)GetValue(ItemFocusedProperty); }
+            set { SetValue(ItemFocusedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ItemFocused.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemFocusedProperty =
+            DependencyProperty.Register("ItemFocused", typeof(bool), typeof(VSCodeItems), new PropertyMetadata(false));
+
+
+
         public SolidColorBrush TextColor
         {
             get { return (SolidColorBrush)GetValue(TextColorProperty); }

@@ -73,6 +73,15 @@ namespace CustomTreeViewItem
             }
         }
 
+        public new void GotFocus(bool state)
+        {
+            ItemFocused = state;
+            foreach (VSCodeItems item in this.Items)
+            {
+                item.GotFocus(state);
+            }
+        }
+
         public void UnSubscribeEvents()
         {
             this.MouseDoubleClick -= VSCodeItems_MouseDoubleClick;

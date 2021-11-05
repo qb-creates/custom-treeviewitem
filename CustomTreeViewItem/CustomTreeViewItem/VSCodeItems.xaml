@@ -52,7 +52,7 @@
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="true"/>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="true"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemFocused}" Value=" true"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="#44094771"/>
@@ -64,7 +64,7 @@
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
                                                 <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemSelected}" Value="true"/>
-                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsFocused}" Value="false"/>
+                                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemFocused}" Value=" false"/>
                                             </MultiDataTrigger.Conditions>
                                             <MultiDataTrigger.Setters>
                                                 <Setter Property="Background" Value="#22FFFFFF"/>

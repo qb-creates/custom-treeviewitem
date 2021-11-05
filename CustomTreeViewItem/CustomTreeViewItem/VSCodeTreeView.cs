@@ -41,6 +41,8 @@ namespace CustomTreeViewItem
             utilityButtonTwo = (Button)GetTemplateChild("PART_UtilityButtonTwo");
             utilityButtonThree = (Button)GetTemplateChild("PART_UtilityButtonThree");
 
+            this.GotFocus += VSCodeTreeView_GotFocus;
+            this.LostFocus += VSCodeTreeView_LostFocus;
             treeView.MouseLeftButtonUp += VSCodeTreeView_MouseLeftButtonUp;
             treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             utilityButtonOne.MouseEnter += UtilityButton_MouseEnter;
@@ -54,6 +56,22 @@ namespace CustomTreeViewItem
             utilityButtonTwo.Click += UtilityButtonTwo_Click;
             utilityButtonThree.Click += UtilityButtonThree_Click;
             expanderImage.Source = UncheckedImageSource;
+        }
+
+        private void VSCodeTreeView_LostFocus(object sender, RoutedEventArgs e)
+        {
+            foreach (VSCodeItems item in treeView.Items)
+            {
+                item.GotFocus(false);
+            }
+        }
+
+        private void VSCodeTreeView_GotFocus(object sender, RoutedEventArgs e)
+        {
+            foreach(VSCodeItems item in treeView.Items)
+            {
+                item.GotFocus(true);
+            }
         }
 
         public void UnsubscribeEvents()

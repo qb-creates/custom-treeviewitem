@@ -80,43 +80,43 @@
 
                                 <!--Three utitlity Buttons-->
                                 <StackPanel x:Name="PART_UtilityButtonContainer" Grid.Column="2" Grid.ColumnSpan="3" Orientation="Horizontal" Visibility="Hidden">
-                                    <Button x:Name="PART_UtilityButtonOne" 
-                                        SnapsToDevicePixels="True"    
-                                        Visibility="{TemplateBinding UtilityButtonOneVisibility}"
-                                        Margin="0,0,1,0"
-                                        HorizontalAlignment="right"
-                                        Cursor="Hand"
-                                        Style="{StaticResource UtilityButtonsStyle}">
+                                    <Button x:Name="PART_UtilityButtonOne"
+                                            SnapsToDevicePixels="True"    
+                                            Visibility="{TemplateBinding UtilityButtonOneVisibility}"
+                                            Margin="0,0,1,0"
+                                            HorizontalAlignment="right"
+                                            Cursor="Hand"
+                                            Style="{StaticResource UtilityButtonsStyle}">
                                         <Image Source="{TemplateBinding ButtonOneImageSource}" 
-                                           RenderOptions.BitmapScalingMode="HighQuality" 
-                                           Width="{TemplateBinding UtilityButtonSize}"
-                                           Height="{TemplateBinding UtilityButtonSize}">
+                                               RenderOptions.BitmapScalingMode="HighQuality" 
+                                               Width="{TemplateBinding UtilityButtonSize}"
+                                               Height="{TemplateBinding UtilityButtonSize}">
                                         </Image>
                                     </Button>
                                     <Button x:Name="PART_UtilityButtonTwo"      
-                                        SnapsToDevicePixels="True"    
-                                        Visibility="{TemplateBinding UtilityButtonTwoVisibility}"
-                                        Margin="0,0,1,0"
-                                        HorizontalAlignment="right" 
-                                        Cursor="Hand" 
-                                        Style="{StaticResource UtilityButtonsStyle}">
+                                            SnapsToDevicePixels="True"    
+                                            Visibility="{TemplateBinding UtilityButtonTwoVisibility}"
+                                            Margin="0,0,1,0"
+                                            HorizontalAlignment="right" 
+                                            Cursor="Hand" 
+                                            Style="{StaticResource UtilityButtonsStyle}">
                                         <Image x:Name="UtilityImageTwo"
-                                           Source="{TemplateBinding ButtonTwoImageSource}"
-                                           RenderOptions.BitmapScalingMode="HighQuality" 
-                                           Width="{TemplateBinding UtilityButtonSize}" 
-                                           Height="{TemplateBinding UtilityButtonSize}"/>
+                                               Source="{TemplateBinding ButtonTwoImageSource}"
+                                               RenderOptions.BitmapScalingMode="HighQuality" 
+                                               Width="{TemplateBinding UtilityButtonSize}" 
+                                               Height="{TemplateBinding UtilityButtonSize}"/>
                                     </Button>
                                     <Button x:Name="PART_UtilityButtonThree"        
-                                        SnapsToDevicePixels="True"    
-                                        Visibility="{TemplateBinding UtilityButtonThreeVisibility}"
-                                        Margin="0,0,1,0"
-                                        HorizontalAlignment="right" 
-                                        Cursor="Hand" 
-                                        Style="{StaticResource UtilityButtonsStyle}">
+                                            SnapsToDevicePixels="True"    
+                                            Visibility="{TemplateBinding UtilityButtonThreeVisibility}"
+                                            Margin="0,0,1,0"
+                                            HorizontalAlignment="right" 
+                                            Cursor="Hand" 
+                                            Style="{StaticResource UtilityButtonsStyle}">
                                         <Image Source="{TemplateBinding ButtonThreeImageSource}" 
-                                           RenderOptions.BitmapScalingMode="HighQuality" 
-                                           Width="{TemplateBinding UtilityButtonSize}" 
-                                           Height="{TemplateBinding UtilityButtonSize}"/>
+                                               RenderOptions.BitmapScalingMode="HighQuality" 
+                                               Width="{TemplateBinding UtilityButtonSize}" 
+                                               Height="{TemplateBinding UtilityButtonSize}"/>
                                     </Button>
                                 </StackPanel>
 
