@@ -12,6 +12,7 @@ namespace CustomTreeViewItem
         private bool applyTemplateComplete;
         private bool isChecked = false;
 
+        //
         static VSCodeItems()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(VSCodeItems), new FrameworkPropertyMetadata(typeof(VSCodeItems)));
